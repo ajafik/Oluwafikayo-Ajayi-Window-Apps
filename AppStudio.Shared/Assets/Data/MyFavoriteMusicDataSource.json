@@ -1,0 +1,22 @@
+{
+  "Items": [
+    {
+      "Type": "Url",
+      "Title": "DJ Nano",
+      "Icon": "/Assets/DataImages/emoji-1.png",
+      "Target": "nokia-music://play/artist/?artist=943515"
+    },
+    {
+      "Type": "Url",
+      "Title": "Jamestown Revival",
+      "Icon": "/Assets/DataImages/world.png",
+      "Target": "nokia-music://play/artist/?artist=42312927"
+    },
+    {
+      "Type": "Url",
+      "Title": "LHS",
+      "Icon": "/Assets/DataImages/menuitem-icon.png",
+      "Target": "nokia-music://play/artist/?artist=58125"
+    }
+  ]
+}

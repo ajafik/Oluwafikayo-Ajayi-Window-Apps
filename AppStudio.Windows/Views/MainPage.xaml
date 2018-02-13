@@ -1,0 +1,78 @@
+<Page
+    x:Class="AppStudio.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppStudio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:AppStudio.ViewModels"
+    mc:Ignorable="d">
+ 
+  <Grid Background="{StaticResource AppBackground}">
+    <Grid.ChildrenTransitions>
+      <TransitionCollection>
+        <EntranceThemeTransition/>
+      </TransitionCollection>
+    </Grid.ChildrenTransitions>
+
+    <Hub x:Name="Container"  DataContext="{Binding}" Header="{Binding NavigationHelper}" HeaderTemplate="{StaticResource PageHeader}" SectionHeaderClick="OnSectionHeaderClick" Style="{StaticResource AppHubStyle}" SectionsInViewChanged="OnSectionsInViewChanged">
+      <HubSection x:Name="AboutMeSection" Header="About Me" DataContext="{Binding MainViewModel.AboutMeModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/AboutMeDataSource.json, Type=vm:AboutMeViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource AboutMeList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+      <HubSection x:Name="TwitterSection" Header="Twitter" DataContext="{Binding MainViewModel.TwitterModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/TwitterDataSource.json, Type=vm:TwitterViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource TwitterList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+      <HubSection x:Name="InstagramSection" Header="Instagram" DataContext="{Binding MainViewModel.InstagramModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/InstagramDataSource.json, Type=vm:InstagramViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource InstagramList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+      <HubSection x:Name="MyBlogSection" Header="My Blog" DataContext="{Binding MainViewModel.MyBlogModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/MyBlogDataSource.json, Type=vm:MyBlogViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource MyBlogList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+      <HubSection x:Name="MyVideosSection" Header="My Videos" DataContext="{Binding MainViewModel.MyVideosModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/MyVideosDataSource.json, Type=vm:MyVideosViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource MyVideosList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+      <HubSection x:Name="MyFavoriteMusicSection" Header="My Favorite Music" DataContext="{Binding MainViewModel.MyFavoriteMusicModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/MyFavoriteMusicDataSource.json, Type=vm:MyFavoriteMusicViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource MyFavoriteMusicList}" IsHeaderInteractive="{Binding HasMoreItems}" Style="{StaticResource AppHubSectionStyle}" />
+    </Hub>
+
+    <VisualStateManager.VisualStateGroups>
+      <VisualStateGroup>
+        <VisualState x:Name="SnappedView">
+          <Storyboard>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="AboutMeSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource AboutMeListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TwitterSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TwitterListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="InstagramSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource InstagramListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MyBlogSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MyBlogListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MyVideosSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MyVideosListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MyFavoriteMusicSection" Storyboard.TargetProperty="ContentTemplate">
+              <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MyFavoriteMusicListSnapped}"/>
+            </ObjectAnimationUsingKeyFrames>
+          </Storyboard>
+        </VisualState>
+        <VisualState x:Name="FullscreenView">
+        </VisualState>
+      </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+  </Grid>
+
+  <Page.BottomAppBar>
+    <CommandBar Background="{StaticResource AppBarBackground}">
+      <AppBarButton x:Uid="RefreshButton" DataContext="{Binding MainViewModel}" Command="{Binding RefreshCommand}">
+        <AppBarButton.Icon>
+          <BitmapIcon UriSource="ms-appx:///Assets/AppBar/Refresh.png"/>
+        </AppBarButton.Icon>
+      </AppBarButton>
+    </CommandBar>
+  </Page.BottomAppBar>
+</Page>
